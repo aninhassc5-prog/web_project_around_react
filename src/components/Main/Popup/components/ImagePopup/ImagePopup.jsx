@@ -1,18 +1,19 @@
-export default function Card(props) {
-  const { name, link } = props.card;
+export default function ImagePopup(props) {
+  const { onClose, card } = props;
+  if (!card) return null;
+  const { name, link } = card;
+
   return (
-    <div className="elements__card">
-      <button className="elements__image-button">
-        <img className="elements__image" src="" alt="" />
-      </button>
-      <div className="elements__title">
-        <h3>{name}</h3>
+    <div className="popup popup_type_image popup_opened" id="image-popup">
+      <div className="popup__container popup__container_type_image">
         <button
-          className="elements__button elements__button_type_like"
+          className="popup__button popup__button_type_close"
           type="button"
-        >
-          <img src="./images/like.svg" alt="Curtir" />
-        </button>
+          onClick={onClose}
+        ></button>
+
+        <img src={link} alt={name} className="popup__image" />
+        <p className="popup__caption">{name}</p>
       </div>
     </div>
   );

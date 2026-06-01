@@ -7,6 +7,7 @@ import likeIcon from "../../images/like.svg";
 import { useState } from "react";
 import Popup from "./Popup/Popup.jsx";
 import NewCard from "./Popup/components/NewCard/NewCard";
+import Card from "./Card/Card";
 
 const cards = [
   {
@@ -62,7 +63,11 @@ export default function Main() {
           />
         </div>
       </section>
-
+      <ul className="cards__list">
+        {cards.map((card) => (
+          <Card key={card._id} card={card} />
+        ))}
+      </ul>
       {popup && (
         <Popup onClose={handleClosePopup} title={popup.title}>
           {popup.children}
