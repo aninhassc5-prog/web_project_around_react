@@ -8,23 +8,27 @@
   top: 0;
   left: 0;
   visibility: hidden;
+  z-index: 99999; /* Força o modal a ficar à frente de tudo no site */
 }
 
 .modal__opened {
   visibility: visible;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5) !important;
 }
-
+.modal__content {
+  height: auto !important;
+  width: auto !important;
+  max-width: 100% !important;
+}
 .modal__container {
-  position: relative;
-  box-sizing: border-box;
-  padding: 36px;
-  width: 430px;
-  height: 330px;
-  border-radius: 10px;
-  background-color: #fff;
+  position: relative !important;
+  box-sizing: border-box !important;
+  padding: 34px 36px 36px !important;
+  width: 430px !important;
+  height: 330px !important; /* Tamanho padrão ideal do projeto Around */
+  border-radius: 10px !important;
+  background-color: #ffffff !important;
 }
-
 .modal__close-button {
   position: absolute;
   top: -40px;
@@ -60,6 +64,7 @@
   line-height: 100%;
   margin: 0 auto;
   margin-bottom: 30px;
+  background-color: transparent;
 }
 
 .modal__submit-button {

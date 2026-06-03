@@ -4,35 +4,41 @@ import likeIcon from "../../../../../images/like.svg";
 
 export default function NewCard() {
   return (
-    <div className="elements__card">
-      <button className="elements__image-button">
-        <img className="elements__image" src="" alt="" />
-      </button>
-      <button
-        className="elements__button elements__button_type_trash"
-        type="button"
-      >
-        <img
-          className="elements__icon elements__icon_type_trash-cap"
-          src={trashCapIcon}
-          alt="Excluir"
+    <form className="modal__form" name="new-card" noValidate>
+      {/* CAMPO DO TÍTULO */}
+      <label className="modal__field">
+        <input
+          className="modal__input modal__input_type_title"
+          id="card-title"
+          type="text"
+          name="name"
+          placeholder="Title"
+          minLength="2"
+          maxLength="30"
+          autoComplete="off"
+          required
         />
-        <img
-          className="elements__icon elements__icon_type_trash-can"
-          src={trashCanIcon}
-          alt="Excluir"
-        />
-      </button>
+        <span className="modal__error card-title-error"></span>
+      </label>
 
-      <div className="elements__title">
-        <h3 className="elements__text"></h3>
-        <button
-          className="elements__button elements__button_type_like"
-          type="button"
-        >
-          <img src={likeIcon} alt="Curtir" />
-        </button>
-      </div>
-    </div>
+      {/* CAMPO DO LINK DA IMAGEM */}
+      <label className="modal__field">
+        <input
+          className="modal__input modal__input_type_link"
+          id="card-link"
+          type="url"
+          name="link"
+          placeholder="Image link"
+          autoComplete="off"
+          required
+        />
+        <span className="modal__error card-link-error"></span>
+      </label>
+
+      {/* BOTÃO SAVE */}
+      <button className="modal__submit-button" type="submit">
+        Save
+      </button>
+    </form>
   );
 }

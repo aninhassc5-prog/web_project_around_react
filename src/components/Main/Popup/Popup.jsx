@@ -1,16 +1,22 @@
+import "../../../blocks/popup.css";
+
 export default function Popup(props) {
-  const { onClose, title, children } = props;
+  // Certifique-se de que a desestruturação tem o 'isImage' exatamente assim
+  const { onClose, title, children, isImage } = props;
 
   return (
-    <div className="popup">
-      <div className="popup__content">
+    <div className="modal modal__opened">
+      {/* Remove a caixa branca mudando para elements__container */}
+      <div className={isImage ? "elements__container" : "modal__container"}>
         <button
           aria-label="Close modal"
-          className="popup__close"
+          className="modal__close-button"
           type="button"
           onClick={onClose}
-        />
-        {title && <h3 className="popup__title">{title}</h3>}
+        >
+          ✕
+        </button>
+        {!isImage && title && <h3 className="modal__title">{title}</h3>}
         {children}
       </div>
     </div>
