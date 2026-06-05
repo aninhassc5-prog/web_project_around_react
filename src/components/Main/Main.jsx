@@ -57,8 +57,11 @@ export default function Main({
           >
             <img
               className="profile__avatar"
-              src={avatarImg}
+              src={currentUser?.avatar || avatarImg}
               alt="Imagem do autor"
+              onError={(e) => {
+                e.target.src = avatarImg;
+              }}
             />
             <button
               type="button"

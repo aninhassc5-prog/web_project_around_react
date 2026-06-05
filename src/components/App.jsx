@@ -44,16 +44,23 @@ function App() {
   };
 
   const handleUpdateAvatar = (data) => {
+    // Passamos o link do avatar para a API
     api
       .updateAvatar({ avatar: data.avatar })
       .then((newData) => {
-        setCurrentUser(newData);
+        // Se a API retornar um objeto atualizado com sucesso, guardamos no estado
+        if (newData && newData.avatar) {
+          setCurrentUser(newData);
+        } else {
+          // Fallback caso a API devolva uma estrutura diferente
+          setCurrentUser((prev) => ({ ...prev, avatar: data.avatar }));
+        }
         handleClosePopup();
       })
       .catch((error) => console.error(`Erro ao atualizar avatar: ${error}`));
   };
 
-  //  FUNÇÃO MOVIDA PARA AQUI: Curtir/Descurtir
+  //  FUNÇÃO Curtir/Descurtir
   async function handleCardLike(card) {
     const isLiked = card.isLiked;
     await api
@@ -66,7 +73,7 @@ function App() {
       .catch((error) => console.error(error));
   }
 
-  //  FUNÇÃO MOVIDA PARA AQUI: Excluir cartão
+  //  FUNÇÃO: Excluir cartão
   function handleCardDelete(card) {
     api
       .deleteCard(card._id)
