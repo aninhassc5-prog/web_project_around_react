@@ -1,21 +1,19 @@
-import { useState } from "react";
-
+import { useContext } from "react";
 export default function Card(props) {
   const { name, link, isLiked } = props.card;
-  const { handleOpenPopup } = props;
+  const { handleOpenPopup, onCardLike, onCardDelete } = props;
 
-  // 2. Cria um estado local que começa com o valor inicial vindo do objeto card
-  const [curtido, setCurtido] = useState(isLiked);
+  const cardLikeButtonClassName = `card__like-button ${
+    isLiked ? "card__like-button_is-active" : ""
+  }`;
 
-  const imageComponent = {
-    name: name,
-    link: link,
-  };
+  function handleLikeClick() {
+    onCardLike(props.card);
+  }
 
-  // 3. Função que inverte o estado ao clicar no coração
-  const alternarLike = () => {
-    setCurtido(!curtido);
-  };
+  function handleDeleteClick() {
+    onCardDelete(props.card);
+  }
 
   return (
     <li className="card">
@@ -23,22 +21,22 @@ export default function Card(props) {
         aria-label="Delete card"
         className="card__delete-button"
         type="button"
+        onClick={handleDeleteClick} //  Atribuído o clique de remoção
       />
       <img
         className="card__image"
         src={link}
         alt={name}
-        onClick={() => handleOpenPopup(imageComponent)}
+        onClick={() => handleOpenPopup(props.card)}
       />
       <div className="card__description">
         <h2 className="card__title">{name}</h2>
 
-        {/* 4. Adiciona o onClick e muda a classe dinamicamente se estiver curtido */}
         <button
           aria-label="Like card"
           type="button"
-          onClick={alternarLike}
-          className={`card__like-button ${curtido ? "card__like-button_is-active" : ""}`}
+          className={cardLikeButtonClassName}
+          onClick={handleLikeClick} //  Atribuído o clique de curtir
         />
       </div>
     </li>
